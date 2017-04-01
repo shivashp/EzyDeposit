@@ -9,7 +9,6 @@ export default class SecondScreen extends Component {
     return(
       <View style = {global.COMMON.container}>
         <StatusBar hidden = {true}/>
-        <TopBar />
         <View style = {global.COMMON.content}>
           <View style = {styles.ac_details}>
             <Text style = {global.COMMON.heading}>ACCOUNT NAME</Text>
@@ -23,7 +22,7 @@ export default class SecondScreen extends Component {
             <TouchableOpacity style = {[styles.button, {backgroundColor: global.ACCENT}]} activeOpacity = {0.6} onPress = {() => Actions.pop()}>
                 <Text style = {styles.buttonText}>Cancel</Text>
             </TouchableOpacity>
-            <TouchableOpacity style = {styles.button} activeOpacity = {0.6}>
+            <TouchableOpacity style = {styles.button} activeOpacity = {0.6} onPress = {() => Actions.Denomination()}>
                 <Text style = {styles.buttonText}>Proceed</Text>
             </TouchableOpacity>
           </View>
@@ -35,8 +34,6 @@ export default class SecondScreen extends Component {
 
 const styles = StyleSheet.create({
   ac_details: {
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 15
   },

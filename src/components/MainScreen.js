@@ -15,7 +15,6 @@ export default class MainScreen extends Component {
     return (
       <View style = {global.COMMON.container}>
         <StatusBar hidden = {true}/>
-        <TopBar />
         <View style = {global.COMMON.content}>
           <View style = {styles.inputContainer}>
             <TextInput
@@ -39,24 +38,7 @@ export default class MainScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  topbar: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  caption: {
-    fontSize: 10,
-    marginTop: 5,
-    color: '#079FB5',
-    fontWeight: 'bold'
-  },
-  right_caption: {
-    fontSize: 11,
-    fontWeight: 'bold',
-    textAlign: 'right',
-    color: '#0F449A'
-  },
+const styles = StyleSheet.create({    
   inputContainer: {
     borderBottomWidth: 0,
     borderColor: "#ccc"

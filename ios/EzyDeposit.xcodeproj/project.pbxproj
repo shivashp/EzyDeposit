@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -36,6 +35,11 @@
 		2DCD954D1E0B4F2C00145EB5 /* EzyDepositTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EzyDepositTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		103F1D405C4741FAA2241671 /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EA6635E9D234CC89A2DD42E /* Nunito-Italic.ttf */; };
+		D01B859A3B814E9095A4C71A /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 382004919C714C98BE57EF70 /* Nunito-Light.ttf */; };
+		3BC5136E10CC4CE3B04B01F4 /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 816B6E547DA44F38A40372BD /* Nunito-LightItalic.ttf */; };
+		24F9C083A7234111A0951F74 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC2A3D0E66EF4D218D99C3E7 /* Nunito-Regular.ttf */; };
+		6F5B90309F854F1EAA72EFD1 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4009C1D96E34447B93C9A04 /* Nunito-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -255,6 +259,11 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		8EA6635E9D234CC89A2DD42E /* Nunito-Italic.ttf */ = {isa = PBXFileReference; name = "Nunito-Italic.ttf"; path = "../src/fonts/Nunito-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		382004919C714C98BE57EF70 /* Nunito-Light.ttf */ = {isa = PBXFileReference; name = "Nunito-Light.ttf"; path = "../src/fonts/Nunito-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		816B6E547DA44F38A40372BD /* Nunito-LightItalic.ttf */ = {isa = PBXFileReference; name = "Nunito-LightItalic.ttf"; path = "../src/fonts/Nunito-LightItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DC2A3D0E66EF4D218D99C3E7 /* Nunito-Regular.ttf */ = {isa = PBXFileReference; name = "Nunito-Regular.ttf"; path = "../src/fonts/Nunito-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D4009C1D96E34447B93C9A04 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; name = "Nunito-SemiBold.ttf"; path = "../src/fonts/Nunito-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -467,6 +476,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* EzyDepositTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				A487B7C0CDD5462B973095C3 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -481,6 +491,19 @@
 				2D02E4901E0B4A5D006451C7 /* EzyDeposit-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A487B7C0CDD5462B973095C3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8EA6635E9D234CC89A2DD42E /* Nunito-Italic.ttf */,
+				382004919C714C98BE57EF70 /* Nunito-Light.ttf */,
+				816B6E547DA44F38A40372BD /* Nunito-LightItalic.ttf */,
+				DC2A3D0E66EF4D218D99C3E7 /* Nunito-Regular.ttf */,
+				D4009C1D96E34447B93C9A04 /* Nunito-SemiBold.ttf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -564,7 +587,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 610;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -841,6 +864,11 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				103F1D405C4741FAA2241671 /* Nunito-Italic.ttf in Resources */,
+				D01B859A3B814E9095A4C71A /* Nunito-Light.ttf in Resources */,
+				3BC5136E10CC4CE3B04B01F4 /* Nunito-LightItalic.ttf in Resources */,
+				24F9C083A7234111A0951F74 /* Nunito-Regular.ttf in Resources */,
+				6F5B90309F854F1EAA72EFD1 /* Nunito-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

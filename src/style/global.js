@@ -12,17 +12,18 @@ export const COMMON = {
   container: {
     flex: 1,
     backgroundColor: "#FFF",
-    padding: 15
+    padding: 15,
+    justifyContent: 'center'
   },
   light_text: {
     color: LIGHT_PRIMARY_TEXT
   },
   content: {
-    flex: 3
+
   },
   heading: {
     fontSize: 21,
-    marginTop:20,
+    marginTop:10,
     color:'#0185EA',
     fontWeight: '500',
   }
