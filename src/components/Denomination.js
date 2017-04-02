@@ -70,7 +70,8 @@ export default class Denomination extends Component {
       active: false,
       selected: null,
       current: null,
-      dataSource: ds.cloneWithRows([]);
+      list: [],
+      dataSource: ds.cloneWithRows([])
     };
   }
   render() {
@@ -79,8 +80,13 @@ export default class Denomination extends Component {
     const current = (this.state.current !=null)?(<Text style = {styles.tempText}>{this.state.current.size} X {this.state.current.count} = {this.state.current.value}</Text>):null;
     return (
       <View style = {styles.container}>
-        <View style = {{flex:3}}>
-          
+        <View style = {{flex:3, marginTop: 13}}>
+          <ListView
+            enableEmptySections
+            dataSource={this.state.dataSource}
+            renderRow={(data, id) => <Single_item size = {data.size} count = {data.count} value = {data.value} key = {id}/>}
+          />
+          <Total list = {this.state.list}/>
         </View>
         <View style = {{flex: 1.5,backgroundColor: '#F0F0F0'}}>
           <View style = {{ backgroundColor: '#F0F0F0', height: 40, paddingVertical:8,  alignItems: 'center'}}>
@@ -97,11 +103,10 @@ export default class Denomination extends Component {
     )
   }
   selected(id) {
-    let currentValue = this.state.values[id];
+    let currentValue = this.state.values[id]
     this.setState({active: true, selected: id, current: currentValue})
   }
   buttonPressed(input) {
-    console.log(input);
     switch (typeof(input)) {
       case 'number':
         let currentValue = this.state.current;
@@ -117,7 +122,22 @@ export default class Denomination extends Component {
           newState.value = newState.size * newState.count;
           this.setState({current: newState})
         } else if (input == 'Ok') {
-          //Actions.SecondScreen();
+          let list = this.state.list;
+          let current = this.state.current;
+          let contains = false;
+          let current_id = null;
+          for (var i = 0; i < list.length; i++) {
+            if(list[i].id == current.id){
+              contains = true;
+              current_id = i;
+            }
+          }
+          if(contains){
+            list[current_id] = current;
+          } else {
+              list.push(current);
+          }
+          this.setState({current: null, list: list, dataSource: ds.cloneWithRows(list), active: false, selected: null})
         }
         break;
     }
@@ -140,6 +160,49 @@ class SingleBox extends Component {
   }
 }
 
+const Single_item = (props) => (
+  <View style = {styles.single_item}>
+    <View style = {{flex: 2}}>
+      <Text style = {styles.single_item_text}>{props.size}</Text>
+    </View>
+    <View style = {{flex: 1}}>
+      <Text style = {styles.single_item_text}> X </Text>
+    </View>
+    <View style = {{flex: 2}}>
+      <Text style = {styles.single_item_text}>{props.count}</Text>
+    </View>
+    <View style = {{flex: 1}}>
+      <Text style = {styles.single_item_text}> = </Text>
+    </View>
+    <View style = {{flex: 2, alignItems: 'flex-end'}}>
+      <Text style = {styles.single_item_text}>{props.value}</Text>
+    </View>
+  </View>
+)
+
+class Total extends Component {
+  render() {
+    let total = this.props.list.reduce((total, num) => {
+      return total + num.value;
+    }, 0);
+    return(
+      <View style = {styles.single_item}>
+        <View style = {{flex: 3}}>
+
+        </View>
+        <View style = {{flex: 2}}>
+          <Text style = {styles.single_item_text}>Total</Text>
+        </View>
+        <View style = {{flex: 1}}>
+          <Text style = {styles.single_item_text}> = </Text>
+        </View>
+        <View style = {{flex: 2, alignItems: 'flex-end'}}>
+          <Text style = {styles.single_item_text}> {total} </Text>
+        </View>
+      </View>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -168,6 +231,17 @@ const styles = StyleSheet.create({
   tempText: {
     fontSize: 19,
     color: '#0185EA',
+  },
+  single_item: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderBottomWidth: 1,
+    borderColor: '#efefef',
+    flexDirection: 'row'
+  },
+  single_item_text: {
+    fontFamily: 'Nunito-Regular',
+    fontSize: 18
   }
 
 })
