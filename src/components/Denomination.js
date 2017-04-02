@@ -150,7 +150,7 @@ class SingleBox extends Component {
     return(
       <TouchableOpacity style = {[styles.box]} activeOpacity = {0.5} onPress = {() => this.props.onPress(this.props.id)}>
         <Image
-          source = {{ uri: 'http://www.freebiesgallery.com/wp-content/uploads/2014/02/blurred-background-2.jpg'}}
+          source = {require('../images/blurred-bg.jpg')}
           style = {[styles.box,{opacity: (this.props.selected)?0.6:1}]}
           >
           <Text style = {styles.boxText}>{this.props.size} X</Text>
