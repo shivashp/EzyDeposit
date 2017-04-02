@@ -1,15 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View,TextInput, StyleSheet, ListView, Animated, TouchableOpacity, ScrollView } from 'react-native'
-import InputButton from './InputButton'
+import { Text, View,TextInput, StyleSheet, ListView, TouchableOpacity, ScrollView, Image } from 'react-native'
+import Keyboard from './Keyboard'
 
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-const keys = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9],
-  ['Del', 0, 'Ok']
-]
+
 const deValues = [
   {
     id: 0,
@@ -72,84 +67,78 @@ export default class Denomination extends Component {
     super(props);
     this.state = {
       values : deValues,
-      // dataSource: ds.cloneWithRows(this.props.values),
-      scaleValue: new Animated.Value(0),
-      selected: 0,
-      intial: true
+      active: false,
+      selected: null,
+      current: null,
+      dataSource: ds.cloneWithRows([]);
     };
   }
   render() {
-    let length = Array(100).fill().map((e,i)=>i+1);
-    const smallBox = length.map((i) => <SingleBox size = "small" key = {i} value = {i}/>)
+    const keyboard = this.state.active?(<Keyboard onPress = {this.buttonPressed.bind(this)} />): null;
+    const boxes = deValues.map((data)=><SingleBox onPress = {this.selected.bind(this)} selected = {this.state.selected == data.id} size ={data.size} value = {data.value} count = {data.count} id ={data.id} key = {data.id}/>)
+    const current = (this.state.current !=null)?(<Text style = {styles.tempText}>{this.state.current.size} X {this.state.current.count} = {this.state.current.value}</Text>):null;
     return (
       <View style = {styles.container}>
         <View style = {{flex:3}}>
-
+          
         </View>
-        <View style = {{flex: 1.5, paddingHorizontal: 10}}>
-          <ScrollView showsHorizontalScrollIndicator = {false} horizontal = {true} style ={{flexDirection: 'row'}}>
-            <SingleBox value = "1000"/>
-            <SingleBox value = "500"/>
-            <SingleBox value = "100"/>
-            <SingleBox value = "50"/>
-            <SingleBox value = "20"/>
-            <SingleBox value = "10"/>
-            <SingleBox value = "5"/>
-            <SingleBox value = "2"/>
-            <SingleBox value = "1"/>
+        <View style = {{flex: 1.5,backgroundColor: '#F0F0F0'}}>
+          <View style = {{ backgroundColor: '#F0F0F0', height: 40, paddingVertical:8,  alignItems: 'center'}}>
+            {current}
+          </View>
+          <ScrollView showsHorizontalScrollIndicator = {false} horizontal = {true} style ={{flexDirection: 'row',paddingHorizontal: 10}}>
+            {boxes}
           </ScrollView>
         </View>
         <View style = {{flex: 2.2}}>
-          <Keyboard />
+          {keyboard}
         </View>
       </View>
     )
+  }
+  selected(id) {
+    let currentValue = this.state.values[id];
+    this.setState({active: true, selected: id, current: currentValue})
+  }
+  buttonPressed(input) {
+    console.log(input);
+    switch (typeof(input)) {
+      case 'number':
+        let currentValue = this.state.current;
+        currentValue.count = currentValue.count * 10 + input;
+        currentValue.value = currentValue.size * currentValue.count;
+        this.setState({current: currentValue })
+        break;
+
+      case 'string':
+        if(input == 'Del'){
+          let newState = this.state.current;
+          newState.count = Math.floor(newState.count / 10);
+          newState.value = newState.size * newState.count;
+          this.setState({current: newState})
+        } else if (input == 'Ok') {
+          //Actions.SecondScreen();
+        }
+        break;
+    }
   }
 
 }
 
 class SingleBox extends Component {
   render() {
-    const text = (this.props.size == "small")?(<Text style = {[styles.boxText, styles.smallText]}>{this.props.value}</Text>): (<Text style = {styles.boxText}>{this.props.value} X</Text>)
     return(
-      <TouchableOpacity style = {[styles.box, (this.props.size == "small")?styles.smallBox: styles.bigBox]} activeOpacity = {0.5}>
-        {text}
+      <TouchableOpacity style = {[styles.box]} activeOpacity = {0.5} onPress = {() => this.props.onPress(this.props.id)}>
+        <Image
+          source = {{ uri: 'http://www.freebiesgallery.com/wp-content/uploads/2014/02/blurred-background-2.jpg'}}
+          style = {[styles.box,{opacity: (this.props.selected)?0.6:1}]}
+          >
+          <Text style = {styles.boxText}>{this.props.size} X</Text>
+        </Image>
       </TouchableOpacity>
     )
   }
 }
-
-class Keyboard extends Component {
-  _renderInputButtons() {
-    let views = [];
-    for(var r = 0; r < keys.length; r++){
-      let row = keys[r];
-      let inputRow = [];
-      for (var i = 0; i < row.length; i++ ) {
-        let input = row[i];
-        inputRow.push(
-          <InputButton
-            value = {input}
-            key ={ r + "-" + i}
-            onPress = {() => console.log("pressed")}
-            />
-        );
-      }
-      console.log(inputRow);
-      views.push(<View key ={"row" + r} style = {{flexDirection: 'row',flex: 1, justifyContent:'center'}}>{inputRow}</View>)
-    }
-    return views;
-  }
-
-  render() {
-    return(
-      <View style= {{flex: 1}}>
-        {this._renderInputButtons()}
-      </View>
-    )
-  }
-}
-
 
 
 const styles = StyleSheet.create({
@@ -168,16 +157,17 @@ const styles = StyleSheet.create({
   boxText: {
     fontSize: 22,
     color: '#0185EA',
+    color: '#fff',
+    fontWeight: 'bold',
+    backgroundColor: 'transparent',
     fontFamily: 'Nunito-Regular'
   },
   smallText: {
     fontSize: 15
   },
-  smallBox: {
-    width: 60,
-    height: 60
-  },
-  bigBox: {
-
+  tempText: {
+    fontSize: 19,
+    color: '#0185EA',
   }
+
 })

@@ -12,7 +12,7 @@ export default class SecondScreen extends Component {
         <View style = {global.COMMON.content}>
           <View style = {styles.ac_details}>
             <Text style = {global.COMMON.heading}>ACCOUNT NAME</Text>
-            <Text style = {{fontSize: 22, color: '#333', paddingTop: 15}}>SHIVA PANDEY SHIVA PANDEY</Text>
+            <Text style = {{fontSize: 22, color: '#333', paddingTop: 15}}>SHIVA PANDEY</Text>
           </View>
           <View style = {styles.ac_details}>
             <Text style = {global.COMMON.heading}>ACCOUNT NO</Text>

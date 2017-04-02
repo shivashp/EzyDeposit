@@ -13,7 +13,7 @@ export default  class Root extends Component {
         <Scene key="root" navBar = {TopBar}>
           <Scene key = "MainScreen" component = {MainScreen} title = "Home"/>
           <Scene key = "SecondScreen" component = {SecondScreen} title = "SecondScreen"/>
-          <Scene key = "Denomination" component = {Denomination} title = "Denomination" />          
+          <Scene key = "Denomination" component = {Denomination} title = "Denomination" initial = {true}/>          
         </Scene>
       </Router>
     )

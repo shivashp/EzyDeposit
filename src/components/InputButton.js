@@ -7,9 +7,8 @@ var {height, WIDTH} = Dimensions.get('window');
 export default class InputButton extends Component {
 
     render() {
-      console.log();
         return (
-            <TouchableHighlight style ={[styles.button]} activeOpacity ={0.6} onPress = {() => console.log('')} underlayColor = "#E8E8E8">
+            <TouchableHighlight style ={[styles.button]} activeOpacity ={0.6} onPress = {() => this.props.onPress(this.props.value)} underlayColor = "#E8E8E8">
                 <Text style ={{color: (this.props.value == "Ok")?"green":"#333", fontSize: 22}}>{this.props.value}</Text>
             </TouchableHighlight>
         )
