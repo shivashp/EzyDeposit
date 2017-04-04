@@ -75,6 +75,7 @@ export default class Denomination extends Component {
     };
   }
   render() {
+    const list = Object.assign([],this.state.list);
     const keyboard = this.state.active?(<Keyboard onPress = {this.buttonPressed.bind(this)} />): null;
     const boxes = deValues.map((data)=><SingleBox onPress = {this.selected.bind(this)} selected = {this.state.selected == data.id} size ={data.size} value = {data.value} count = {data.count} id ={data.id} key = {data.id}/>)
     const current = (this.state.current !=null)?(<Text style = {styles.tempText}>{this.state.current.size} X {this.state.current.count} = {this.state.current.value}</Text>):null;
@@ -86,7 +87,7 @@ export default class Denomination extends Component {
             dataSource={this.state.dataSource}
             renderRow={(data, id) => <Single_item size = {data.size} count = {data.count} value = {data.value} key = {id}/>}
           />
-          <Total list = {this.state.list}/>
+        <Total list = {list}/>
         </View>
         <View style = {{flex: 1.5,backgroundColor: '#F0F0F0'}}>
           <View style = {{ backgroundColor: '#F0F0F0', height: 40, paddingVertical:8,  alignItems: 'center'}}>
@@ -146,8 +147,10 @@ export default class Denomination extends Component {
 }
 
 class SingleBox extends PureComponent {
+  shouldComponentUpdate(nextProps, nextState){
+    return JSON.stringify(nextProps) !== JSON.stringify(this.props);
+  }
   render() {
-    console.log("Rendered");
     return(
       <TouchableOpacity style = {[styles.box]} activeOpacity = {0.5} onPress = {() => this.props.onPress(this.props.id)}>
         <Image
@@ -181,8 +184,9 @@ const Single_item = (props) => (
   </View>
 )
 
-class Total extends Component {
+class Total extends Component {  
   render() {
+    console.log("Total");
     let total = this.props.list.reduce((total, num) => {
       return total + num.value;
     }, 0);

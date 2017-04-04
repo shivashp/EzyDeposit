@@ -31,7 +31,12 @@ export default class Keyboard extends PureComponent {
     return views;
   }
 
+  shouldComponentUpdate(nextProps, nextState){    
+    return JSON.stringify(nextProps) !== JSON.stringify(this.props);
+  }
+
   render() {
+    console.log("Rendering Keyboard");
     return(
       <View style= {{flex: 1}}>
         {this._renderInputButtons()}
