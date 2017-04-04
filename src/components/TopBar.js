@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { Text, View, StyleSheet, Image, Dimensions } from 'react-native'
 const { height, width } = Dimensions.get('window')
 
-export default class TopBar extends Component {
+export default class TopBar extends PureComponent {
   render() {
     return(
       <View style = {{height: 60, position: 'absolute',padding: 20, width: width}}>

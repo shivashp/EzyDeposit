@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 import { Text, View,TextInput, StyleSheet, ListView, TouchableOpacity, ScrollView, Image } from 'react-native'
 import Keyboard from './Keyboard'
 
@@ -145,8 +145,9 @@ export default class Denomination extends Component {
 
 }
 
-class SingleBox extends Component {
+class SingleBox extends PureComponent {
   render() {
+    console.log("Rendered");
     return(
       <TouchableOpacity style = {[styles.box]} activeOpacity = {0.5} onPress = {() => this.props.onPress(this.props.id)}>
         <Image

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { View } from 'react-native'
 import InputButton from './InputButton'
 
@@ -10,14 +10,14 @@ const keys = [
 ]
 
 
-export default class Keyboard extends Component {
+export default class Keyboard extends PureComponent {
   _renderInputButtons() {
     let views = [];
     for(var r = 0; r < keys.length; r++){
       let row = keys[r];
       let inputRow = [];
       for (var i = 0; i < row.length; i++ ) {
-        let input = row[i];        
+        let input = row[i];
         inputRow.push(
           <InputButton
             value = {input}
