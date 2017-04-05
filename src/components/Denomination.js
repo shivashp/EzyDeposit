@@ -1,5 +1,5 @@
 import React, { Component, PureComponent } from 'react'
-import { Text, View,TextInput, StyleSheet, ListView, TouchableOpacity, ScrollView, Image } from 'react-native'
+import { Text, View,TextInput, StyleSheet, ListView, TouchableOpacity, ScrollView, Image, ActivityIndicator } from 'react-native'
 import Keyboard from './Keyboard'
 
 
@@ -66,19 +66,41 @@ export default class Denomination extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      values : deValues,
+      values : [],
       active: false,
       selected: null,
       current: null,
+      loading: true,
       list: [],
       dataSource: ds.cloneWithRows([])
     };
   }
+  componentDidMount(){
+    if(this.state.loading){
+      fetch("http://139.59.37.232:4000/denominations", {
+          method: "GET",
+      })
+      .then((response) => response.json())
+      .then((responseData) => {
+        var data= responseData.data.map((data) => {
+          return {
+            id: data.id,
+            size: data.denomination_unit,
+            count: 0,
+            value: 0
+          }
+        })
+        this.setState({values: data, loading: false})
+      })
+      .done();
+    }
+  }
   render() {
     const list = Object.assign([],this.state.list);
     const keyboard = this.state.active?(<Keyboard onPress = {this.buttonPressed.bind(this)} />): null;
-    const boxes = deValues.map((data)=><SingleBox onPress = {this.selected.bind(this)} selected = {this.state.selected == data.id} size ={data.size} value = {data.value} count = {data.count} id ={data.id} key = {data.id}/>)
+    const boxes = this.state.values.map((data, id)=><SingleBox onPress = {this.selected.bind(this)} selected = {this.state.selected == data.id} size ={data.size} value = {data.value} count = {data.count} id ={id} key = {data.id}/>)
     const current = (this.state.current !=null)?(<Text style = {styles.tempText}>{this.state.current.size} X {this.state.current.count} = {this.state.current.value}</Text>):null;
+    const box_content = (this.state.loading)?(<ActivityIndicator animating={true} style = {{paddingLeft: 180, marginTop: -40}} size="small" />):boxes;
     return (
       <View style = {styles.container}>
         <View style = {{flex:3, marginTop: 13}}>
@@ -94,7 +116,7 @@ export default class Denomination extends Component {
             {current}
           </View>
           <ScrollView showsHorizontalScrollIndicator = {false} horizontal = {true} style ={{flexDirection: 'row',paddingHorizontal: 10}}>
-            {boxes}
+            {box_content}
           </ScrollView>
         </View>
         <View style = {{flex: 2.2}}>
@@ -104,7 +126,7 @@ export default class Denomination extends Component {
     )
   }
   selected(id) {
-    let currentValue = this.state.values[id]
+    let currentValue = this.state.values[id];
     this.setState({active: true, selected: id, current: currentValue})
   }
   buttonPressed(input) {
@@ -184,9 +206,8 @@ const Single_item = (props) => (
   </View>
 )
 
-class Total extends Component {  
+class Total extends Component {
   render() {
-    console.log("Total");
     let total = this.props.list.reduce((total, num) => {
       return total + num.value;
     }, 0);
